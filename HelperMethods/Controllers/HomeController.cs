@@ -23,10 +23,16 @@ namespace HelperMethods.Controllers
             return View(new Person());
         }
 
+        //[HttpPost]
+        //public ActionResult CreatePerson(Person person)
+        //{
+        //    return View(person);
+        //}
+
         [HttpPost]
         public ActionResult CreatePerson(Person person)
         {
-            return View(person);
+            return View("DisplayPerson",person);
         }
     }
 }

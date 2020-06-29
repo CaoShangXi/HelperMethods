@@ -1,13 +1,12 @@
 ﻿@* model被称为强类型 *@
 @model HelperMethods.Models.Person
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "CreatePerson";
-                Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CreatePerson";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
 <h2>CreatePerson</h2>
 @*@using (Html.BeginForm(
@@ -44,21 +43,41 @@
         <label>PersonId</label>
         @*@Html.TextBox("personId",Model.PersonId)*@
         @* 使用model生成html元素 *@
-        @Html.TextBoxFor(m => m.PersonId)
+        @*@Html.TextBoxFor(m => m.PersonId)*@
+        @Html.Editor("PersonId")
     </div>
     <div class="dataElem">
         <label>First Name</label>
         @*@Html.TextBox("FristName",Model.FirstName)*@
-        @Html.TextBoxFor(m => m.FirstName)
+        @*@Html.TextBoxFor(m => m.FirstName)*@
+        @Html.Editor("FirstName")
     </div>
     <div class="dataElem">
         <label>LastName</label>
         @*@Html.TextBox("LastName",Model.LastName)*@
-        @Html.TextBoxFor(m => m.LastName)
+        @*@Html.TextBoxFor(m => m.LastName)*@
+        @Html.EditorFor(m => m.LastName)
     </div>
     <div class="dataElem">
         <label>Role</label>
-       @Html.DropDownListFor(m=>m.role,new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
+        @*@Html.DropDownListFor(m=>m.role,new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))*@
+        @Html.EditorFor(m => m.Role)
     </div>
+    <div class="dataElem">
+        <label>Birth Date</label>
+        @Html.EditorFor(m => m.BirthDate)
+    </div>
+    <input type="submit" value="Submit" />
+}
+
+    <h2>CreatePerson:@Html.LabelForModel()</h2>
+@using (Html.BeginRouteForm(
+        "FormRoute",//路由名称
+        new { },//路由片段变量
+        FormMethod.Post,//form元素中method标签属性的值
+        new { @class = "personClass", data_formType = "person" }//form元素的其他标签属性
+        ))
+{
+    @Html.EditorForModel()
     <input type="submit" value="Submit" />
 }
